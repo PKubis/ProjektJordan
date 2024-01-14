@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model _4Ballers.Models.Product
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var isAdmin = User.Identity.IsAuthenticated && UserManager.GetUserAsync(User).Result?.Email == "piotrkubis1989@gmail.com";
+}
+
+@if (isAdmin)
+{
+    <h2>Dodaj<span style="color: orange"> Produkt</span></h2>
+
+    <form asp-action="Create" class="crud-form">
+        <div class="form-group-crud">
+            <label asp-for="Name" class="form-label-crud">Nazwa:</label>
+            <input asp-for="Name" class="form-control-crud" />
+        </div>
+        <div class="form-group-crud">
+            <label asp-for="Brand" class="form-label-crud" style="color:orange">Marka:</label>
+            <input asp-for="Brand" class="form-control-crud" />
+        </div>
+        <div class="form-group-crud">
+            <label asp-for="Price" class="form-label-crud">Cena:</label>
+            <input asp-for="Price" class="form-control-crud" />
+        </div>
+        <div class="form-group-crud">
+            <label asp-for="ImageUrl" class="form-label-crud" style="color:orange">Obraz:</label>
+            <input asp-for="ImageUrl" class="form-control-crud" placeholder="np. jordan1.jpg" />
+        </div>
+        <div class="form-group-crud">
+            <label asp-for="Description" class="form-label-crud">Opis:</label>
+            <textarea asp-for="Description" class="form-control-crud"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+}
+
